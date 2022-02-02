@@ -1,15 +1,23 @@
 const nodemailer = require("nodemailer");
+const dotenv = require("dotenv");
+
+dotenv.config();
 
 const smtpOptions = {
-  host: process.env.SMTP_HOST,
-  port: process.env.SMTP_PORT,
+  host: String(process.env.MAIL_HOST),
+  port: String(process.env.MAIL_PORT),
   auth: {
-    user: process.env.SMTP_AUTH_USER,
-    pass: process.env.SMTP_AUTH_PASS,
+    user: String(process.env.MAIL_USER),
+    pass: String(process.env.MAIL_PASS),
   },
 };
 
-async function sendEmail({ to, subject, html, from = process.env.SMTP_EMAIL }) {
+async function sendEmail({
+  to,
+  subject,
+  html,
+  from = String(process.env.MAIL_EMAIL),
+}) {
   const transporter = nodemailer.createTransport(smtpOptions);
   await transporter.sendMail({ from, to, subject, html });
 }

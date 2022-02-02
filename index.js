@@ -10,6 +10,8 @@ const path = require("path");
 //Load routes
 const authRoutes = require("./routes/auth");
 const usersRoutes = require("./routes/users");
+const postsRoutes = require("./routes/posts");
+const categoriesRoutes = require("./routes/categories");
 const uploadRoutes = require("./routes/upload");
 
 //app configuration
@@ -37,8 +39,10 @@ app.use(morgan("common"));
 
 app.use("/api/auth", authRoutes);
 app.use("/api/users", usersRoutes);
+app.use("/api/posts", postsRoutes);
+app.use("/api/categories", categoriesRoutes);
 app.use("/api/upload", uploadRoutes);
 
 app.listen(process.env.PORT, () => {
-  console.log("Express server started");
+  console.log(`Express server started ${process.env.PORT}`);
 });
