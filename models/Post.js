@@ -2,6 +2,10 @@ const mongoose = require("mongoose");
 
 const postSchema = new mongoose.Schema(
   {
+    coverPicture: {
+      type: String,
+      required: true,
+    },
     title: {
       type: String,
       required: true,
@@ -10,13 +14,24 @@ const postSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    postnames: {
+    author: {
       type: String,
       required: true,
     },
     categories: {
       type: Array,
       trim: true,
+    },
+    status: {
+      type: String,
+      enum: {
+        values: ["private", "public"],
+      },
+      default: "private",
+    },
+    isVisible: {
+      type: Boolean,
+      default: false,
     },
   },
   { timestamps: true }
@@ -26,8 +41,6 @@ postSchema.methods.toJSON = function () {
   const post = this;
   const postObject = post.toObject();
 
-  delete postObject.createdAt;
-  delete postObject.updatedAt;
   delete postObject.__v;
 
   return postObject;

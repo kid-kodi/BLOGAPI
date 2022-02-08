@@ -1,4 +1,7 @@
 const multer = require("multer");
+const path = require("path");
+const dotenv = require("dotenv");
+dotenv.config();
 
 // Image config
 const imageMsgFileStorage = multer.diskStorage({

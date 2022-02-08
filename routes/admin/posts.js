@@ -1,6 +1,6 @@
-const Post = require("../models/Post");
+const Post = require("../../models/Post");
 const router = require("express").Router();
-const auth = require("../middleware/auth");
+const auth = require("../../middleware/auth");
 
 //create a new post
 router.post("/create", auth, async (req, res) => {
@@ -50,7 +50,7 @@ router.get("/:id", async (req, res) => {
 //get all posts
 router.get("/", async (req, res) => {
   try {
-    const posts = await Post.find({ isVisible: true }).sort({ _id: -1 });
+    const posts = await Post.find().sort({ _id: -1 });
     res.status(200).json(posts);
   } catch (err) {
     res.status(500).json(err);
